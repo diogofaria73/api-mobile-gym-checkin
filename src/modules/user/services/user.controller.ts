@@ -11,8 +11,7 @@ import {
 } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 import { UserService } from './user.service'
-import { CreateUserDto } from '../dtos/create-user-dto'
-import { UpdateUserDto } from '../dtos/update-user-dto'
+import { Prisma } from '@prisma/client'
 
 
 @ApiTags('Users')
@@ -21,7 +20,7 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Post('create')
-  async create(@Body() data: CreateUserDto) {
+  async create(@Body() data: Prisma.UserCreateInput) {
     const user = await this.userService.create(data)
 
     if (user != null) {
@@ -32,7 +31,7 @@ export class UserController {
   }
 
   @Put('update')
-  async update(@Body() data: UpdateUserDto) {
+  async update(@Body() data: Prisma.UserUpdateInput) {
     const user = await this.userService.update(data)
     return user
   }
