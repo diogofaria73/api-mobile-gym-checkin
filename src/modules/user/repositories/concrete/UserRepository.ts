@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { IUserRepository } from "../abstract/Iuser-repository";
-import { User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { PrismaService } from "src/infrastructure/database/prisma.service";
 import { CreateUserDto } from "../../dtos/create-user-dto";
 import { UpdateUserDto } from "../../dtos/update-user-dto";
@@ -10,18 +10,18 @@ export class UserRepository implements IUserRepository<User> {
 
   constructor(private readonly prisma: PrismaService) { }
 
-  async create(data: CreateUserDto): Promise<User | null> {
+  async create(data: Prisma.UserCreateInput): Promise<User | null> {
     if (data) {
       const user = await this.prisma.user.create({ data })
       return user
     }
     return null
   }
-  async update(data: UpdateUserDto): Promise<User | null> {
+  async update(data: Prisma.UserUpdateInput): Promise<User | null> {
     if (data) {
       const user = await this.prisma.user.update({
         where: {
-          id: data.id,
+          id: String(data.id),
         },
         data,
       })
