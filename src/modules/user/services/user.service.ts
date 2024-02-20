@@ -2,13 +2,15 @@ import { Injectable } from "@nestjs/common";
 import { UserRepository } from "../repositories/concrete/UserRepository";
 import { Prisma, User } from "@prisma/client";
 import { EncryptKeys } from "src/utils/security/encrypt-key-utils";
+import { UpdateUserDto } from "../dtos/update-user-dto";
+import { CreateUserDto } from "../dtos/create-user-dto";
 
 @Injectable()
 export class UserService {
 
   constructor(private readonly userRepository: UserRepository) { }
 
-  async create(data: Prisma.UserCreateInput): Promise<User | null> {
+  async create(data: CreateUserDto): Promise<User | null> {
     if (data) {
       data.password = await EncryptKeys.hash(data.password)
       const user = await this.userRepository.create(data)
@@ -17,7 +19,7 @@ export class UserService {
     return null
   }
 
-  async update(data: Prisma.UserUpdateInput): Promise<User | null> {
+  async update(data: UpdateUserDto): Promise<User | null> {
     if (data) {
       //check if password has changed and need to be encrypted again
       //recovery encrypted data from database
