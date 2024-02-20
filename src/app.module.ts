@@ -1,9 +1,9 @@
 
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
-import { envSchema } from './configs/env/env'
 import { PrismaService } from './infrastructure/database/prisma.service'
 import { UserModule } from './modules/user/user.module'
+import { envSchema } from './configs/environment/env'
 
 
 @Module({

@@ -6,12 +6,10 @@ import {
   Get,
   Param,
   Post,
-  Put,
-  UseGuards,
+  Put
 } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 import { UserService } from './user.service'
-import { Prisma } from '@prisma/client'
 import { CreateUserDto } from '../dtos/create-user-dto'
 import { UpdateUserDto } from '../dtos/update-user-dto'
 

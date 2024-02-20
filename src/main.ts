@@ -5,7 +5,7 @@ import { NestExpressApplication } from '@nestjs/platform-express'
 import * as basicAuth from 'express-basic-auth'
 import { ConfigService } from '@nestjs/config'
 import { AppModule } from './app.module'
-import { Env } from './configs/env/env'
+import { Env } from './configs/environment/env'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {

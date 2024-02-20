@@ -1,6 +1,5 @@
 
 import { hash } from 'bcryptjs'
-import { envSchema } from 'src/configs/env/env'
 
 export class EncryptKeys {
   static async hash(password: string) {
